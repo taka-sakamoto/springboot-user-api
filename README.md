@@ -1,40 +1,105 @@
-# Spring Boot User API
+# Spring Boot User API (with JWT Authentication)
 
-このプロジェクトは、Spring Boot を使用して構築したユーザー管理用 REST API です。  
-H2 データベースを利用し、ユーザー情報の登録・取得・更新・削除を行う基本的な CRUD 機能を提供します。
+ユーザー管理（CRUD）と JWT 認証を備えた Spring Boot 3 アプリケーションです。  
+学習目的で構築しており、認証・認可・データ永続化など、バックエンド開発の基本要素を一通り実装しています。
 
-学習目的として、以下の技術要素を実践的に組み合わせています：
+---
 
-- Spring Boot による REST API 開発
-- Spring Data JPA を用いたリポジトリ層の実装
-- H2 Database によるインメモリ DB
-- Maven による依存管理
-- Java 25 を使用したモダンなアプリケーション構成
+## 🚀 Features
 
-このプロジェクトは、バックエンド開発の基礎を理解し、ポートフォリオとして提示できる構成を目指して作成しています。
+### 🔐 Authentication
+- POST `/login`  
+  - ユーザー名とパスワードを受け取り、JWT を発行
+  - レスポンス例：
+    ```json
+    {
+      "token": "xxxxx.yyyyy.zzzzz"
+    }
+    ```
 
-## ✨ 特徴
+### 👤 User CRUD
+- GET `/users` — 全ユーザー取得  
+- GET `/users/{id}` — ID で取得  
+- POST `/users` — 新規作成  
+- PUT `/users/{id}` — 更新  
+- DELETE `/users/{id}` — 削除  
 
-- `/users` エンドポイントでユーザー情報を JSON 形式で操作
-- H2 Console を利用した DB の可視化
-- シンプルで読みやすいコード構成
-- Spring Boot の標準構造に沿ったフォルダ設計
-- 初学者でも動かしやすい軽量アプリケーション
+### 🛡 Security
+- Spring Security + JWT による認証  
+- 認証が必要なエンドポイントは JWT を `Authorization: Bearer <token>` で送信
 
-## 技術スタック
+---
+
+## 🛠 Tech Stack
 
 | 分類 | 使用技術 |
 |------|-----------|
-| 言語 | Java 25 |
-| フレームワーク | Spring Boot |
+| 言語 | Java 21 |
+| フレームワーク | Spring Boot 3.2.5 |
+| セキュリティ | Spring Security / JWT |
 | データベース | H2 Database |
 | ORM | Spring Data JPA |
 | ビルドツール | Maven |
-| 実行方法 | `mvn spring-boot:run` |
 
-## API Endpoints
+---
 
-GET /users  
-POST /users  
-PUT /users/{id}  
-DELETE /users/{id}  
+## ▶️ How to Run
+
+### 1. Clone
+
+- git clone https://github.com/taka-sakamoto/springboot-user-api.git
+- cd springboot-user-api
+
+### 2. Run
+
+- mvn spring-boot:run
+
+### 3. Access
+
+- API: `http://localhost:8080`
+- H2 Console: `http://localhost:8080/h2-console`  
+  - JDBC URL: `jdbc:h2:mem:testdb`
+
+---
+
+## 📂 Project Structure
+```
+src/main/java/com/example/demo/
+├── AuthController.java
+├── DemoApplication.java
+├── HelloController.java
+├── JwtAuthenticationFilter.java
+├── JwtUtil.java
+├── LoginRequest.java
+├── LoginResponse.java
+├── SecurityConfig.java
+├── User.java
+├── UserController.java
+├── UserRepository.java
+└── UserService.java
+```
+
+---
+
+## 📝 Notes
+
+- JWT の署名アルゴリズムは HS256  
+- 認証フィルターは `JwtAuthenticationFilter`  
+- セキュリティ設定は `SecurityConfig`  
+- H2 はインメモリ DB のため、アプリ再起動で初期化されます
+
+---
+
+## 📄 Future Improvements
+
+- Refresh Token の導入  
+- User ロールによるアクセス制御  
+- Integration Test の追加  
+- Docker 化
+
+---
+
+## 📜 License
+
+This project is released under the MIT License.
+
