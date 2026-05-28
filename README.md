@@ -1,7 +1,7 @@
-# Spring Boot User API (with JWT Authentication)
+# User Management API
 
-ユーザー管理（CRUD）と JWT 認証を備えた Spring Boot 3 アプリケーションです。  
-学習目的で構築しており、認証・認可・データ永続化など、バックエンド開発の基本要素を一通り実装しています。
+Java + Spring Boot を使用したユーザー管理APIです。  
+CRUD機能を中心に、Entity → Repository → Controller → DB の一連の流れを実装しています。
 
 ---
 
